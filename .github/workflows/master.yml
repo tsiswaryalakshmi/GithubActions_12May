@@ -9,6 +9,6 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Zip Folder
-      run: 7a a release.zip .
+      run: tar -a -c -f release.zip *.
     - name: Release to Github
       run: echo "Release"
