@@ -14,5 +14,5 @@ jobs:
       run: echo "Release"
     - uses: actions/upload-artifact@v1
       with:
-      name: Zip Folder
-      path: ${{ github.workspace }}/release.zip
+        name: Zip Folder
+        path: ${{ github.workspace }}/release.zip
