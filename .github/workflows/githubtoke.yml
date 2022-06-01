@@ -16,13 +16,15 @@ jobs:
           echo ${{secrets.SECRET_TOKEN}} | sed 's/./& /g' 
   # Use a GitHub Actions secret variable in a bash shell
       - name: Step 2 - GitHub Action if statement (true)
+      - uses: actions/checkout@v1
         env: 
           WHO_TO_TRUST: ${{ secrets.SECRET_TOKEN }}
-        if:  env.WHO_TO_TRUST == 'TrustNo1'
-        run: echo "I know what the secret token is!" 
-      - uses: actions/checkout@v1
-      - name: Zip Folder
+      - if:  env.WHO_TO_TRUST == 'TrustNo1'
+        name: if
+ #      run: echo "I know what the secret token is!" 
         run: tar cfzv release.tar .
+ #     - name: Zip Folder
+        
       - name: Release to Github
         run: echo "Release"
 
