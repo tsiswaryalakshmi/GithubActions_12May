@@ -20,16 +20,7 @@ jobs:
         env: 
           WHO_TO_TRUST: ${{ secrets.SECRET_TOKEN }}
       - if:  env.WHO_TO_TRUST == 'TrustNo1'
-      - name: if
- #      run: | echo "I know what the secret token is!" 
-        run: |
-          echo "If Statement"
-          - uses: actions/checkout@v1
-            run: tar cfzv release.tar .
- #     - name: Zip Folder
-        
-      - name: Release to Github
-        run: echo "Release"
+        run:  echo "I know what the secret token is!" 
 
 
 
