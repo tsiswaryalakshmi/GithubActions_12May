@@ -20,8 +20,8 @@ jobs:
         env: 
           WHO_TO_TRUST: ${{ secrets.SECRET_TOKEN }}
       - if:  env.WHO_TO_TRUST == 'TrustNo1'
-        name: if
- #      run: |echo "I know what the secret token is!" 
+      - name: if
+ #      run: | echo "I know what the secret token is!" 
         run: |
           echo "If Statement"
           - uses: actions/checkout@v1
