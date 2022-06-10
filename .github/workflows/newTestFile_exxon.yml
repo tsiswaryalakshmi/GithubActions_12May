@@ -1,0 +1,18 @@
+name: MasterDeployCI
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Zip Folder
+      run: tar cfzv release.tar .
+    - name: Release to Github
+      run: echo "Release"
+    - uses: actions/upload-artifact@v1
+      with:
+        name: Zip Folder
+        path: ${{ github.workspace }}/release.tar
