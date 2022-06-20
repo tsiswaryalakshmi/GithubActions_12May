@@ -11,33 +11,33 @@ jobs:
     - name: Compile
       run: echo Hello World!
  
- DeployDev:
+  DeployDev:
     - name: Deploy to Dev
     needs: [build]
     runs-on: windows-latest
     env:
-      - name: Dev
+    - name: Dev
     steps: 
-      - name: Deploy
-        run : echo Hello I am deploying
+    - name: Deploy
+      run : echo Hello I am deploying
   
   DeploytoStaging:
     - name: Staging
     needs: [build]
     runs-on: windows-latest
     env:
-      - name: Staging
+    - name: Staging
     steps: 
-      - name: Deploy
-        run : echo Hello I am deploying to Staging
+    - name: Deploy
+      run : echo Hello I am deploying to Staging
         
    DeployingtoProd:
      - name: Prod
     needs: [DeploytoStaging]
     runs-on: windows-latest
      env:
-       - name: prod
+     - name: prod
      steps:
-      - name: Deploy
-        run : echo Hello I am deploying to Production    
+     - name: Deploy
+       run : echo Hello I am deploying to Production    
        
