@@ -36,7 +36,7 @@ jobs:
 #    environment: 
 #      name: Prod
     steps:
-      - uses: tsiswaryalakshmi/manual-approval@v1
+      - uses: tsiswaryalakshmi/manual-approval_2@v1
         with:
           secret: ${{github.TOKEN}}
           approvers: tsiswaryalakshmi
