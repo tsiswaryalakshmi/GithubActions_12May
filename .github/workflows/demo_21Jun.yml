@@ -1,0 +1,42 @@
+name: CI + CD + manual
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Compile
+        run: echo Hello, world!
+    
+  DeployDev:
+    name: Deploy to Dev 
+    if: github.event_name == 'pull_request'
+    needs: [Build]
+    runs-on: ubuntu-latest
+    environment: 
+      name: Dev
+    steps:
+      - name: Deploy
+        run: echo I am deploying! 
+
+            
+  DeployProd:
+    name: Deploy to Production 
+    needs: [DeployStaging]
+    runs-on: ubuntu-latest
+#    environment: 
+#      name: Prod
+    steps:
+      - name: Deploy
+        run: echo I am deploying! 
+      - uses: tsiswaryalakshmi/manual-approval@v1
+        
+    
