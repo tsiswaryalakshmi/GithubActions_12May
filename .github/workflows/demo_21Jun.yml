@@ -1,54 +1,54 @@
-name: CI + CD + manual
+name: CI + CD
 
 on:
   push:
     branches: [ main ]
-#  pull_request:
-#    branches: [ main ]
-#  workflow_dispatch:
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   Build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
       - name: Compile
         run: echo Hello, world!
-    
-  DeployDev:
-    name: Deploy to Dev 
-#    if: github.event_name == 'pull_request'
+
+  DeployStaging:
+    name: Deploy to Staging 
     if: github.event.ref == 'refs/heads/main'
     needs: [Build]
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     environment: 
-      name: Dev
+      name: Staging
+ #     url: 'http://test.myapp.com'
     steps:
       - name: Deploy
         run: echo I am deploying! 
-
             
   DeployProd:
     name: Deploy to Production 
-    needs: [DeployDev]
-    runs-on: windows-latest
+    needs: [DeployStaging]
+    runs-on: ubuntu-latest
     environment: 
-      name: Prod
+      name: Production
+ #     url: 'http://www.myapp.com'
     steps:
       - name: Deploy
         run: echo I am deploying! 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v1
       - name: Zip Folder
-        run: tar cfzv release.tar .
+        run: zip -r release.zip .
       - name: Release to Github
         run: echo "Release"
-      - name: Download a Build Artifact
       - uses: actions/upload-artifact@v1
         with:
           name: Zip Folder
-          path: ${{ github.workspace }}/release.tar
-    
+          path: ${{github.workspace}}/release.zip
+      - uses: actions/download-artifact@v1
+        with: 
+          name: Zip Folder
 
-        
     
