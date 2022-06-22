@@ -33,8 +33,8 @@ jobs:
     name: Deploy to Production 
     needs: [DeployDev]
     runs-on: windows-latest
-#    environment: 
-#      name: Prod
+    environment: 
+      name: Prod
     steps:
       - name: Deploy
         run: echo I am deploying! 
