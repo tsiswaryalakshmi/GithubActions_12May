@@ -28,32 +28,32 @@ jobs:
       - name: Deploy
         run: echo I am deploying! 
             
-  DeployProd:
-    name: Deploy to Production 
-    needs: [DeployStaging]
-    runs-on: ubuntu-latest
-    environment: 
-      name: Prod
-    steps:
-      - name: Deploy
-        run: echo I am deploying! 
+ DeployProd:
+   name: Deploy to Production 
+   needs: [DeployStaging]
+   runs-on: ubuntu-latest
+   environment: 
+     name: Prod
+   steps:
+     - name: Deploy
+       run: echo I am deploying! 
      - uses: actions/checkout@v2
      - name: Zip Folder
        run: tar cfzv release.tar .
      - name: Release to Github
        run: echo "Release"
      - name: Download a Build Artifact
-	     uses: actions/upload-artifact@v1
+     - uses: actions/upload-artifact@v1
        with:
          name: Zip Folder
          path: ${{ github.workspace }}/release.tar
 
-    - uses: actions/download-artifact@v3
-      id: download
-      with:
-        name: Zip Folder
-        path: path/to/artifacts
+     - uses: actions/download-artifact@v3
+       id: download
+       with:
+         name: Zip Folder
+         path: path/to/artifacts
 
-   - name: 'Echo download path'
-     run: echo ${{steps.download.outputs.download-path}}
+     - name: 'Echo download path'
+       run: echo ${{steps.download.outputs.download-path}}
     
