@@ -49,12 +49,6 @@ jobs:
           name: Zip Folder
           path: ${{ github.workspace }}/release.tar
     
-      - uses: actions/download-artifact@v1
-        with:
-          name: Zip Folder
-          path: path/to/artifacts
-    
-      - name: 'Echo download path'
-        run: echo ${{steps.download.outputs.download-path}}
+
         
     
